@@ -1,0 +1,140 @@
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, type User } from "firebase/auth";
+import { auth } from "../../../services/firebase/firebaseConfig";
+// import { User } from "firebase/auth";
+
+
+export type Errors = {
+  email?: string;
+  password?: string;
+};
+
+export type FunctionResult = {
+  success: boolean;
+  message: string;
+};
+
+const validation = (email: string, password: string): boolean => {
+  if (!email.trim() && !password.trim()) {
+    alert("Please enter both email and password");
+    return false;
+  }
+  if (!email.trim()) {
+    alert("Please enter email");
+    return false;
+  }
+  if (!password.trim()) {
+    alert("Please enter password");
+    return false;
+  }
+  if (!isValidEmail(email)) {
+    alert("Please enter a valid email");
+    return false;
+  }
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters");
+    return false;
+  }
+  return true;
+};
+export default validation
+
+export const isValidEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export const onLoginTapped = async ({ email, password, setLoading }: {
+  email: string,
+  password: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+}): Promise<FunctionResult> => {
+  if (!validation(email, password)) {
+    console.log('Validation failed');
+    return { success: false, message: 'Validation failed' };
+  }
+  console.log('Validation passed');
+  const result = await loginUser(email, password, setLoading);
+  return result;
+};
+
+const loginUser = async (
+  email: string,
+  password: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>): Promise<FunctionResult> => {
+  setLoading(true);
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    console.log(userCredential.user);
+    saveUserToLocalStorage(userCredential.user);
+    return { success: true, message: 'Logged in successfully' }
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: (error as Error).message }
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const signUpTapped = async ({ email, password, setLoading }: {
+  email: string,
+  password: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+}): Promise<FunctionResult> => {
+  if (!validation(email, password)) {
+    console.log('Validation failed');
+    return { success: false, message: 'Validation failed' };
+  }
+  const result = await signUp(email, password, setLoading);
+  return result
+};
+
+const signUp = async (
+  email: string,
+  password: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+): Promise<FunctionResult> => {
+  setLoading(true);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    console.log(userCredential.user);
+    saveUserToLocalStorage(userCredential.user);
+    return { success: true, message: 'Account created successfully' }
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: (error as Error).message }
+  } finally {
+    setLoading(false);
+  }
+}
+
+export const onGooglePress = async (): Promise<FunctionResult> => {
+  try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      console.log('✅ Firebase user (web):', result.user);
+      saveUserToLocalStorage(result.user);
+    return { success: true, message: 'Logged in successfully' }
+  } catch (error) {
+    console.log(error);
+    alert(`Error : ${error}`);
+    return { success: false, message: (error as Error).message }
+  }
+}
+
+
+type StoredUser = {
+  uid: string;
+  email: string | null;
+  accessToken: string;
+};
+const saveUserToLocalStorage = async (user: User): Promise<void> => {
+  const accessToken = await user.getIdToken();
+
+  const userData: StoredUser = {
+    uid: user.uid,
+    email: user.email,
+    accessToken,
+  };
+
+  localStorage.setItem("user", JSON.stringify(userData));
+};

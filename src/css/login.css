@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f2f5;
+  padding: 16px;
+}
+
+.login-box {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Left */
+.form-section {
+  flex: 1;
+  padding: 40px;
+}
+
+.logo {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.field input {
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.forgot {
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+}
+
+/* Right */
+.image-section {
+  flex: 1;
+  background: #eef2f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+  .login-box {
+    flex-direction: column;
+  }
+
+  .image-section {
+    height: 250px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .image-section {
+    display: none;
+  }
+
+  .form-section {
+    padding: 24px;
+  }
+}

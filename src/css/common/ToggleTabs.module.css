@@ -1,0 +1,28 @@
+.segmentContainer {
+  width: 100%;
+  display: flex;
+  background-color: #b6b6b6;
+  border-radius: 300px;
+  padding: 4px;
+}
+
+.segmentTab {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 300px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.active {
+  background-color: #4d4d4d;
+}
+
+.segmentTab:active {
+  opacity: 0.8;
+}

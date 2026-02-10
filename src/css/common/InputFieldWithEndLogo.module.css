@@ -1,0 +1,30 @@
+/* INPUT */
+.container {
+   display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.inputBoxWrapper {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.inputBox {
+  width: 100%;
+  background-color: transparent;
+  color: black;
+  border: none;
+  padding: 14px;
+}
+
+.inputIcon {
+  padding: 0 12px;
+}
+
+input:focus {
+  outline: none;
+}

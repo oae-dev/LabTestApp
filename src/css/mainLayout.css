@@ -1,0 +1,41 @@
+.sidebar {
+  width: 25vw;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.main-layout-wrapper{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+/* pacient links */
+
+.patient-link {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.patient-item {
+  padding: 6px 16px;
+  border-radius: 8px;
+  background-color: #f6f7f9;
+  color: #1f2937;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.patient-item:hover {
+  background-color: #c2c4c8;
+}
+
+.patient-link.active .patient-item {
+      background-color: #63b3a5;
+    color: rgb(3 3 3);
+    border: 1px solid #19ff00;
+}
