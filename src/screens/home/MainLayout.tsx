@@ -4,8 +4,9 @@ import '../../css/mainLayout.css'
 import { useState } from 'react'
 import Overlay from '../../common/overlay'
 import LabPatientForm from './components/PaisentDetailForm'
-import { loadPatients, savePatients, type LabPatientDetails } from './types/patient'
+import { type LabPatientDetails } from './types/patient'
 import type { PatientTestsMap } from './types/test'
+import { loadPatients, savePatients } from '../../localStorage/loginInfo'
 
 
 export default function MainLayout() {

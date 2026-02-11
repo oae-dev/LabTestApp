@@ -1,4 +1,3 @@
-import React from 'react'
 import type { LabCategory } from '../types/test';
 
 type TestChipsProps = {

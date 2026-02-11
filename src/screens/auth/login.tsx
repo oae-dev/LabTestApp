@@ -15,7 +15,7 @@ export default function Login({ setLoading }: { setLoading: React.Dispatch<React
     const loginTapped = async () => {
         const result = await onLoginTapped({ email, password, setLoading });
         if (result.success) {
-            navigate('/home', { replace: true });
+            navigate('/labForm', { replace: true });
         } else {
             alert(result.message);
         }

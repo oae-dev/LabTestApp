@@ -1,0 +1,159 @@
+/* Page background to make the form pop */
+.pageWrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    min-width: 100vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+        display: flex;
+        flex-direction: column;
+    max-width: 650px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e3e8ee;
+}
+
+.headerSection {
+    border-bottom: 1px solid #f0f3f6;
+}
+
+.title {
+    font-size: 24px;
+    color: #2c333f;
+    margin: 0;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #6a7c92;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.form {
+    padding: 0px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field label {
+    font-size: 14px;
+    color: #444b59;
+    font-weight: 500;
+}
+
+.field input, .field textarea {
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    background-color: #ffffff;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    color: #2c333f;
+}
+
+.field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: #409eff; /* Zoho Blue */
+    box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.1);
+}
+
+.formLebel {
+    font-size: 14px;
+    color: #444b59;
+    font-weight: 500;
+}
+
+/* Logo Upload Area */
+.logoUploadArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadTrigger {
+    cursor: pointer;
+    display: block;
+}
+
+.logoField{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.placeholder {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #dcdfe6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: #909399;
+    background: #fafafa;
+    padding: 10px;
+}
+
+.logoPreview {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #dcdfe6;
+    background: #fff;
+}
+
+.footer {
+    padding-bottom: 10px;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; }
+    .container { width: 100%; margin: 0; border-radius: 0; }
+    .pageWrapper { padding: 0; }
+}
+
+
+.logoWrapper {
+    position: relative;
+}
+
+.removeLogoBtn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: #00000080; /* red */
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}

@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, type User } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebaseConfig";
+import type { LabInfo } from "../../home/types/labDetails";
 // import { User } from "firebase/auth";
 
 
@@ -137,4 +138,24 @@ const saveUserToLocalStorage = async (user: User): Promise<void> => {
   };
 
   localStorage.setItem("user", JSON.stringify(userData));
+};
+
+
+
+// Form Functionality related to authentication screens.
+
+export const validateLabInfo = (form: LabInfo) => {
+    const errors: Record<string, string> = {};
+
+    if (!form.logo) errors.logo = 'Laboratory logo is required';
+    if (!form.labName.trim()) errors.labName = 'Lab name is required';
+    if (!form.email.trim()) errors.email = 'Email is required';
+    if (form.email && !isValidEmail(form.email)) errors.email = 'Please enter a valid email';
+    if (!form.phone.trim()) errors.phone = 'Phone number is required';
+    if (!form.address.trim()) errors.address = 'Address is required';
+
+    return {
+        isValid: Object.keys(errors).length === 0,
+        errors,
+    };
 };
