@@ -6,13 +6,11 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { onGooglePress, signUpTapped } from './functionality/auth';
 import { useNavigate } from 'react-router';
 import googleLogo from '../../assets/googleLogo.png';
-import FullScreenLoader from '../../common/FullScreenLoader';
 
-export default function SignUp() {
+export default function SignUp({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
     const onSignUpTapped = async () => {
         const result = await signUpTapped({ email, password, setLoading });
         if (result.success) {
@@ -22,16 +20,15 @@ export default function SignUp() {
         }
     }
     const googleLogin = async () => {
-            const result = await onGooglePress();
-            if (result.success) {
-                navigate('/home', { replace: true });
-            } else {
-                alert(result.message)
-            }
+        const result = await onGooglePress();
+        if (result.success) {
+            navigate('/home', { replace: true });
+        } else {
+            alert(result.message)
         }
+    }
     return (
         <>
-        <FullScreenLoader visible={loading} />
             <form onSubmit={(e) => { e.preventDefault(); onSignUpTapped(); }} className='formWrapper'>
                 <InputFieldWithEndLogo
                     type='text'
@@ -54,7 +51,7 @@ export default function SignUp() {
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                     <DynamicButton color='black' backgroundColor='white' horzontalPadding={20} type='submit'>Sign Up</DynamicButton>
                 </div>
-                 <DynamicButton color='white'
+                <DynamicButton color='white'
                     type='button' backgroundColor='transparent' onClick={googleLogin}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
                         <img src={googleLogo} alt='google' />

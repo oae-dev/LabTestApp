@@ -1,7 +1,7 @@
 import { type LabPatientDetails } from '../types/patient';
 import style from '../../../css/patientHomeDetail.module.css'
 
-export default function PaisentDetails({patient}:{patient:LabPatientDetails}) {
+export default function PaisentDetails({ patient }: { patient: LabPatientDetails }) {
   return (
     <div className={style.container}>
       <h2 className={style.heading}>Patient Details</h2>

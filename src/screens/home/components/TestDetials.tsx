@@ -47,8 +47,8 @@ export default function TestDetails({ patient, state, onChange }: Props) {
   }, [selectedCats]);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <p>Available Tests</p>
+    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+      <h1 className="test-heading">Select Tests for {patient.name}</h1>
 
       <LabSearchPicker
         selectedCats={selectedCats}
@@ -92,8 +92,6 @@ export default function TestDetails({ patient, state, onChange }: Props) {
         />
       )}
 
-      <h1 style={{ marginTop: '40px', fontSize: '24px' }}>Selected Tests</h1>
-
       {/* Entry List Grouped by Category */}
 
       <TestGrouping
@@ -102,6 +100,8 @@ export default function TestDetails({ patient, state, onChange }: Props) {
         toggleTest={toggleTest}
         handleInputChange={handleInputChange}
         patientName={patient.name}
+        patientGender={patient.gender}
+        patientAge={patient.age}
       />
 
 

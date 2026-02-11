@@ -6,13 +6,11 @@ import { IoHomeOutline } from 'react-icons/io5';
 import InputFieldWithEndLogo from '../../common/inputFieldWithEndLogo';
 import { onGooglePress, onLoginTapped } from './functionality/auth';
 import googleLogo from '../../assets/googleLogo.png';
-import FullScreenLoader from '../../common/FullScreenLoader';
 
-export default function Login() {
+export default function Login({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
 
     const loginTapped = async () => {
         const result = await onLoginTapped({ email, password, setLoading });
@@ -34,7 +32,6 @@ export default function Login() {
 
     return (
         <>
-        <FullScreenLoader visible={loading} />
             <form onSubmit={(e) => { e.preventDefault(); loginTapped(); }} className='formWrapper'>
                 <InputFieldWithEndLogo
                     type='text'

@@ -5,6 +5,8 @@ import { TiPrinter } from 'react-icons/ti';
 import type { LabPatientDetails } from './types/patient';
 import TestDetials from './components/TestDetials';
 import type { PatientTestsMap } from './types/test';
+import '../../css/print/print.css';
+import PrintTestDetails from './printOnlyComponents/PrintTestDetails';
 
 type OutletContextType = {
   patientTests: PatientTestsMap;
@@ -13,9 +15,19 @@ type OutletContextType = {
 
 export default function Home() {
   const location = useLocation();
-  const patient: LabPatientDetails = location.state
 
-  const { patientTests, setPatientTests } = useOutletContext<OutletContextType>();
+  const patient = location.state as LabPatientDetails | null;
+
+  const { patientTests, setPatientTests } =
+    useOutletContext<OutletContextType>();
+
+  if (!patient) {
+    return (
+      <div style={{ padding: '20px', color: '#64748b' }}>
+        Select a patient from the sidebar to begin.
+      </div>
+    );
+  }
 
   const patientTestState =
     patientTests[patient.id] ?? {
@@ -24,26 +36,32 @@ export default function Home() {
       testValues: {},
     };
 
-
-  if (!patient) {
-    return <div>No patient data available</div>;
-  }
-
   return (
-    <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '20px', position: 'relative' }}>
+    <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '0px 20px', position: 'relative' }}>
       <PaisentDetails patient={patient} />
       <hr />
 
-      <TestDetials
-        patient={patient}
-        state={patientTestState}
-        onChange={(nextState) => {
-          setPatientTests(prev => ({
-            ...prev,
-            [patient.id]: nextState,
-          }));
-        }}
-      />
+      {/* SCREEN UI */}
+      <div className="screen-only">
+        <TestDetials
+          patient={patient}
+          state={patientTestState}
+          onChange={(nextState) => {
+            setPatientTests(prev => ({
+              ...prev,
+              [patient.id]: nextState,
+            }));
+          }}
+        />
+      </div>
+
+      {/* PRINT UI */}
+      <div className="print-only">
+        <PrintTestDetails
+          selectedTestIds={patientTestState.selectedTestIds}
+          testValues={patientTestState.testValues}
+        />
+      </div>
 
       <div style={{
         position: 'fixed',
@@ -53,7 +71,7 @@ export default function Home() {
           text='Print'
           icon={<TiPrinter />}
           variant='primary'
-          onClick={() => alert('View Lab Results clicked')}
+          onClick={() => window.print()}
         />
       </div>
     </div>

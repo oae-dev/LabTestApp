@@ -12,17 +12,17 @@ export type PatientTestsMap = {
 
 
 export type ReferenceRule = {
-  gender?: Gender;  
-  minAge?: number;     
-  maxAge?: number;     
+  gender?: Gender;
+  minAge?: number;
+  maxAge?: number;
   min: number;
   max: number;
 };
 export type TestField = {
-  key: string;                
-  label: string;              
-  unit: string;               
-  references: ReferenceRule[]; 
+  key: string;
+  label: string;
+  unit: string;
+  references: ReferenceRule[];
 };
 export type LabTest = {
   id: string;

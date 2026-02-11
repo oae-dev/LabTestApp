@@ -109,10 +109,10 @@ const signUp = async (
 
 export const onGooglePress = async (): Promise<FunctionResult> => {
   try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      console.log('✅ Firebase user (web):', result.user);
-      saveUserToLocalStorage(result.user);
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    console.log('✅ Firebase user (web):', result.user);
+    saveUserToLocalStorage(result.user);
     return { success: true, message: 'Logged in successfully' }
   } catch (error) {
     console.log(error);

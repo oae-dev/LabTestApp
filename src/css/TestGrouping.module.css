@@ -1,65 +1,65 @@
 .container {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .category {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .categoryName {
-  font-weight: bold;
-  color: #3b82f6;
-  font-size: 14px;
-  margin-bottom: 10px;
+    font-weight: bold;
+    color: #3b82f6;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .testCard {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .testHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .testName {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .removeBtn {
-  color: red;
-  border: none;
-  background: none;
-  cursor: pointer;
+    color: red;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .fields {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .label {
-  font-size: 12px;
-  color: #64748b;
+    font-size: 12px;
+    color: #64748b;
 }
 
 .input {
-  padding: 6px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-top: 4px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 4px;
 }
 
 .empty {
-  color: #94a3b8;
+    color: #94a3b8;
 }

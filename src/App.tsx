@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<Auth />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
-          <Route path='/home/:patientId?' element={<Home />}/>
+          <Route path='/home/:patientId?' element={<Home />} />
         </Route>
       </Route>
 

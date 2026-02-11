@@ -9,3 +9,10 @@ hr {
   border-top: 1px solid #d1d5db;
   margin: 16px 0;
 }
+
+.test-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 0%;
+}
