@@ -1,12 +1,15 @@
+
 export type LabPatientDetails = {
   id: string;
   name: string;
   age: number;
-  gender: string;
+  gender: Gender | "";
   phone: string;
-  email: string;
-  address: string;
+  email?: string;
+  address?: string;
 };
+
+export type Gender = 'male' | 'female';
 
 export const STORAGE_KEY = "lab_patients";
 

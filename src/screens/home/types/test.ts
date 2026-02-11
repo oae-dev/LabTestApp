@@ -1,4 +1,4 @@
-export type Gender = 'male' | 'female';
+import type { Gender } from "./patient";
 
 export type ReferenceRule = {
   gender?: Gender;  
@@ -31,16 +31,6 @@ export type PatientTestReport = {
   patientId: string;
   tests: SelectedTest[];
 };
-export type LabPatientDetails = {
-  id: string;
-  name: string;
-  age: number;
-  gender: Gender;
-  phone: string;
-  email?: string;
-  address?: string;
-};
-
 
 export const LAB_TESTS: LabCategory[] = [
   {

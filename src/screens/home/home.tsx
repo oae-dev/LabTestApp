@@ -18,7 +18,7 @@ export default function Home() {
       <PaisentDetails patient={patient} />
       <hr />
 
-        <TestDetials patient={patient} />
+        <TestDetials key={patient.id} patient={patient} />
         
       <div style={{
         position:'absolute',

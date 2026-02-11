@@ -10,6 +10,8 @@ import { loadPatients, savePatients, type LabPatientDetails } from './types/pati
 export default function MainLayout() {
   const [overLayVisible, setOverlayVisible] = useState<boolean>(false)
   const [patients, setPatients] = useState<LabPatientDetails[]>(() => loadPatients());
+ 
+  
   return (
     <>
       {/* <header className='main-layout-header'>

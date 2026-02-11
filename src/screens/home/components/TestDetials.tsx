@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import LabSearchPicker from './LabSearchPicker';
 import { LAB_TESTS } from '../types/test';
-import type { LabPatientDetails } from '../types/test';
+import TestChips from './testChips';
+import type { LabPatientDetails } from '../types/patient';
 
 export default function TestDetails({ patient }: { patient: LabPatientDetails }) {
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
@@ -40,28 +41,11 @@ export default function TestDetails({ patient }: { patient: LabPatientDetails })
 
       {/* Category Selection Result (Chips) */}
       {selectedCats.length > 0 && (
-        <div style={{ marginTop: '20px', padding: '15px', background: '#f8fafc', borderRadius: '12px' }}>
-          {testsToSelectFrom.map(cat => (
-            <div key={cat.id} style={{ marginBottom: '10px' }}>
-              <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8', textTransform: 'uppercase', margin: '0' }}>{cat.name}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '5px' }}>
-                {cat.tests.map(test => (
-                  <button 
-                    key={test.id}
-                    onClick={() => toggleTest(test.id)}
-                    style={{
-                      padding: '6px 14px', borderRadius: '20px', border: '1px solid #cbd5e1', cursor: 'pointer',
-                      backgroundColor: selectedTestIds.includes(test.id) ? '#3b82f6' : 'white',
-                      color: selectedTestIds.includes(test.id) ? 'white' : '#1e293b',
-                    }}
-                  >
-                    {test.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <TestChips 
+        testsToSelectFrom={testsToSelectFrom} 
+        toggleTest={toggleTest} 
+        selectedTestIds={selectedTestIds}
+      />
       )}
 
       <h1 style={{ marginTop: '40px', fontSize: '24px' }}>Selected Tests</h1>
