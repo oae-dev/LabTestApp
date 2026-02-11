@@ -3,12 +3,13 @@ import LabSideBar from './LabSideBar'
 import '../../css/mainLayout.css'
 import { useState } from 'react'
 import Overlay from '../../common/overlay'
-import LabPatientForm from './components/PaisentDetail'
-import { loadPatients, savePatients, type LabPacientDetails } from './types/pacient'
+import LabPatientForm from './components/PaisentDetailForm'
+import { loadPatients, savePatients, type LabPatientDetails } from './types/patient'
+
 
 export default function MainLayout() {
   const [overLayVisible, setOverlayVisible] = useState<boolean>(false)
-  const [patients, setPatients] = useState<LabPacientDetails[]>(() => loadPatients());
+  const [patients, setPatients] = useState<LabPatientDetails[]>(() => loadPatients());
   return (
     <>
       {/* <header className='main-layout-header'>
@@ -33,7 +34,7 @@ export default function MainLayout() {
       </Overlay>
       <div className='main-layout-wrapper'>
         <aside className='sidebar'>
-          <LabSideBar pacients={patients} onPlusTapped={() => setOverlayVisible(true)} />
+          <LabSideBar patients={patients} onPlusTapped={() => setOverlayVisible(true)} />
         </aside>
         <main style={{ display: 'flex', width: '100%' }}>
           <Outlet />

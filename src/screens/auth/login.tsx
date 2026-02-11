@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import DynamicButton from '../../common/dynamicButton';
 import { Link, useNavigate } from 'react-router';
 import { RiLockPasswordLine } from 'react-icons/ri';

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import type { LabPacientDetails } from "../types/pacient";
 import styles from "../../../css/LabPatientForm.module.css";
 import { ImCross } from "react-icons/im";
+import type { LabPatientDetails } from "../types/patient";
 
 type Props = {
-  onSubmit: (data: LabPacientDetails) => void;
+  onSubmit: (data: LabPatientDetails) => void;
   onClose: () => void;
 };
 
 export default function LabPatientForm({ onSubmit, onClose }: Props) {
-  const [form, setForm] = useState<LabPacientDetails>({
+  const [form, setForm] = useState<LabPatientDetails>({
     id: "",
     name: "",
     age: 0,

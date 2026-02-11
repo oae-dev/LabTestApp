@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import DynamicButton from '../../common/dynamicButton'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import InputFieldWithEndLogo from '../../common/inputFieldWithEndLogo'
 import { IoHomeOutline } from 'react-icons/io5';
-import { signUpTapped } from './functionality/auth';
+import { onGooglePress, signUpTapped } from './functionality/auth';
 import { useNavigate } from 'react-router';
+import googleLogo from '../../assets/googleLogo.png';
+import FullScreenLoader from '../../common/FullScreenLoader';
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -19,8 +21,17 @@ export default function SignUp() {
             alert(result.message)
         }
     }
+    const googleLogin = async () => {
+            const result = await onGooglePress();
+            if (result.success) {
+                navigate('/home', { replace: true });
+            } else {
+                alert(result.message)
+            }
+        }
     return (
         <>
+        <FullScreenLoader visible={loading} />
             <form onSubmit={(e) => { e.preventDefault(); onSignUpTapped(); }} className='formWrapper'>
                 <InputFieldWithEndLogo
                     type='text'
@@ -43,7 +54,13 @@ export default function SignUp() {
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                     <DynamicButton color='black' backgroundColor='white' horzontalPadding={20} type='submit'>Sign Up</DynamicButton>
                 </div>
-
+                 <DynamicButton color='white'
+                    type='button' backgroundColor='transparent' onClick={googleLogin}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
+                        <img src={googleLogo} alt='google' />
+                        <span style={{ color: 'black' }}>Continue with Google</span>
+                    </div>
+                </DynamicButton>
 
             </form>
         </>
