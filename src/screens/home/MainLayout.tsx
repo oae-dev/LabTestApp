@@ -5,13 +5,15 @@ import { useState } from 'react'
 import Overlay from '../../common/overlay'
 import LabPatientForm from './components/PaisentDetailForm'
 import { loadPatients, savePatients, type LabPatientDetails } from './types/patient'
+import type { PatientTestsMap } from './types/test'
 
 
 export default function MainLayout() {
   const [overLayVisible, setOverlayVisible] = useState<boolean>(false)
   const [patients, setPatients] = useState<LabPatientDetails[]>(() => loadPatients());
- 
-  
+  const [patientTests, setPatientTests] = useState<PatientTestsMap>({});
+
+
   return (
     <>
       {/* <header className='main-layout-header'>
@@ -22,24 +24,29 @@ export default function MainLayout() {
         onClose={() => setOverlayVisible(false)}
       >
         <LabPatientForm onSubmit={(data) => {
-    setPatients((prev) => {
-      const updated = [
-        ...prev,
-        { ...data, id: crypto.randomUUID() } 
-      ];
-      savePatients(updated); 
-      return updated;
-    });
+          setPatients((prev) => {
+            const updated = [
+              ...prev,
+              { ...data, id: crypto.randomUUID() }
+            ];
+            savePatients(updated);
+            return updated;
+          });
 
-    setOverlayVisible(false);
-  }} onClose={() => setOverlayVisible(false)} />
+          setOverlayVisible(false);
+        }} onClose={() => setOverlayVisible(false)} />
       </Overlay>
       <div className='main-layout-wrapper'>
         <aside className='sidebar'>
           <LabSideBar patients={patients} onPlusTapped={() => setOverlayVisible(true)} />
         </aside>
         <main style={{ display: 'flex', width: '100%' }}>
-          <Outlet />
+          <Outlet
+            context={{
+              patientTests,
+              setPatientTests,
+            }}
+          />
         </main>
       </div>
     </>

@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import styles from '../../../css/SearchPicker.module.css';
 import { LAB_TESTS } from '../types/test';
 
-interface Props {
+type Props = {
   selectedCats: string[];
-  setSelectedCats: React.Dispatch<React.SetStateAction<string[]>>;
-}
+  onChange: (cats: string[]) => void;
+};
 
-const LabSearchPicker = ({ selectedCats, setSelectedCats }: Props) => {
+const LabSearchPicker = ({ selectedCats, onChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -22,22 +22,34 @@ const LabSearchPicker = ({ selectedCats, setSelectedCats }: Props) => {
   }, []);
 
   const toggleCategory = (id: string) => {
-    setSelectedCats(prev => 
-      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
-    );
+    const nextCats = selectedCats.includes(id)
+      ? selectedCats.filter(c => c !== id)
+      : [...selectedCats, id];
+
+    onChange(nextCats);
   };
+
+  const [query, setQuery] = useState('');
+
+  const filteredCategories = useMemo(() => {
+    return LAB_TESTS.filter(cat =>
+      cat.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [query]);
 
   return (
     <div className={styles.container} ref={dropdownRef}>
       <div className={`${styles.searchWrapper} ${isOpen ? styles.active : ''}`}>
         <span className={styles.searchIcon}>🔍</span>
-        <input 
-          type="text" 
-          placeholder="Search for tests..." 
-          className={styles.input} 
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search categories..."
+          className={styles.input}
           onFocus={() => setIsOpen(true)}
         />
-        <button 
+        <button
           className={`${styles.pickerTrigger} ${selectedCats.length > 0 ? styles.hasSelection : ''}`}
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -51,12 +63,12 @@ const LabSearchPicker = ({ selectedCats, setSelectedCats }: Props) => {
         <div className={styles.dropdown}>
           <div className={styles.dropdownHeader}>
             <span className={styles.headerTitle}>Filter by Category</span>
-            <button className={styles.resetBtn} onClick={() => setSelectedCats([])}>Reset</button>
+            <button className={styles.resetBtn} onClick={() => onChange([])}>Reset</button>
           </div>
           <div className={styles.grid}>
-            {LAB_TESTS.map((cat) => (
-              <div 
-                key={cat.id} 
+            {filteredCategories.map((cat) => (
+              <div
+                key={cat.id}
                 className={`${styles.card} ${selectedCats.includes(cat.id) ? styles.cardSelected : ''}`}
                 onClick={() => toggleCategory(cat.id)}
               >

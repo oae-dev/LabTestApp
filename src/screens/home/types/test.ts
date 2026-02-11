@@ -1,5 +1,16 @@
 import type { Gender } from "./patient";
 
+type PatientTestState = {
+  selectedCats: string[];
+  selectedTestIds: string[];
+  testValues: Record<string, string>;
+};
+
+export type PatientTestsMap = {
+  [patientId: string]: PatientTestState;
+};
+
+
 export type ReferenceRule = {
   gender?: Gender;  
   minAge?: number;     
