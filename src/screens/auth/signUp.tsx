@@ -49,7 +49,7 @@ export default function SignUp({ setLoading }: { setLoading: React.Dispatch<Reac
 
 
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                    <DynamicButton color='black' backgroundColor='white' horzontalPadding={20} type='submit'>Sign Up</DynamicButton>
+                    <DynamicButton color='white' backgroundColor='#2195bc' horzontalPadding={20} type='submit'>Sign Up</DynamicButton>
                 </div>
                 <DynamicButton color='white'
                     type='button' backgroundColor='transparent' onClick={googleLogin}>

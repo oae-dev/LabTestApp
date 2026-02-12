@@ -1,45 +1,54 @@
-.container {
-      width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.heading {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: black;
-}
-
-.columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 48px;
-}
-
-.column {
+.compactContainer {
   display: flex;
-  flex-direction: column;
-  row-gap: 2px;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: #f8fafc; 
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  column-gap: 12px;
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 14px;
+  color: #3b82f6; 
 }
 
 .label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #374151;
+  color: #64748b; /* Soft slate gray */
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .value {
   font-size: 14px;
-  color: #111827;
-  text-align: left;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* Suble vertical line between items */
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #e2e8f0;
+}
+
+/* Responsive: stack them if the sidebar takes too much space */
+@media (max-width: 1000px) {
+  .compactContainer {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .divider {
+    display: none;
+  }
 }

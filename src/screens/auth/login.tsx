@@ -69,10 +69,10 @@ export default function Login({ setLoading }: { setLoading: React.Dispatch<React
                     <Link to=''>Forgot password?</Link>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                    <DynamicButton color='black' backgroundColor='white' horzontalPadding={20} type='submit'>Login</DynamicButton>
+                    <DynamicButton color='white' backgroundColor='#2195bc' horzontalPadding={20} type='submit'>Login</DynamicButton>
                 </div>
 
-                <DynamicButton color='white'
+                <DynamicButton 
                     type='button' backgroundColor='transparent' onClick={googleLogin}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
                         <img src={googleLogo} alt='google' />

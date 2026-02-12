@@ -1,9 +1,9 @@
 import { type LabPatientDetails } from '../types/patient';
-import style from '../../../css/patientHomeDetail.module.css'
+import style from '../../../css/print/PrintPatientHomeDetail.module.css';
 
-export default function PaisentDetails({ patient }: { patient: LabPatientDetails }) {
+export default function PrintPaisentDetails({ patient }: { patient: LabPatientDetails }) {
   return (
-    <div className={style.container}>
+    <div className={style.container} >
       <h2 className={style.heading}>Patient Details</h2>
 
       <div className={style.columns}>

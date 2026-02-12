@@ -1,5 +1,4 @@
 import { useLocation, useOutletContext } from 'react-router-dom'
-import PaisentDetails from './components/PaisentDetails';
 import ButtonWithTextAndImage from '../../common/buttonWithTextAndImage';
 import { TiPrinter } from 'react-icons/ti';
 import type { LabPatientDetails } from './types/patient';
@@ -8,6 +7,8 @@ import '../../css/print/print.css';
 import PrintTestDetails from './printOnlyComponents/PrintTestDetails';
 import LabSearchPicker from './components/LabSearchPicker';
 import TestGrouping from './components/TestGrouping';
+import PrintPaisentDetails from './printOnlyComponents/PrintPaisentDetails';
+import PaisentDetails from './components/PatientDetails';
 
 type OutletContextType = {
   patientTests: PatientTestsMap;
@@ -64,7 +65,7 @@ export default function Home() {
 
 
   return (
-    <div className='main-layout-wrapper'>
+    <div style={{ display: 'flex', width: '100%', height: '100%' }}>
       <aside className='sidebar'>
         <LabSearchPicker
           selectedCats={state.selectedCats}
@@ -73,7 +74,7 @@ export default function Home() {
         />
       </aside>
 
-      <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '0px 20px', position: 'relative' }}>
+      <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '10px 20px', position: 'relative' }}>
 
 
         <PaisentDetails patient={patient} />
@@ -92,8 +93,11 @@ export default function Home() {
           />
         </div>
 
+
         {/* PRINT UI */}
         <div className="print-only">
+          <PrintPaisentDetails patient={patient} />
+        <hr />
           <PrintTestDetails
             selectedTestIds={state.selectedTestIds}
             testValues={state.testValues}

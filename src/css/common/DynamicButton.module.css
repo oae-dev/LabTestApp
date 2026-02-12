@@ -1,0 +1,14 @@
+
+.customButton {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.customButton:hover {
+  filter: brightness(92%); 
+  transform: translateY(-1px);
+}

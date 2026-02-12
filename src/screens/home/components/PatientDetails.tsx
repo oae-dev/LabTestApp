@@ -1,0 +1,39 @@
+import { type LabPatientDetails } from '../types/patient';
+import { FaUser, FaPhoneAlt, FaClock, FaVenusMars } from 'react-icons/fa';
+import style from '../../../css/PatientHomeDetail.module.css';
+
+export default function PaisentDetails({ patient }: { patient: LabPatientDetails }) {
+  return (
+    <div className={style.compactContainer}>
+      <div className={style.infoItem}>
+        <FaUser className={style.icon} />
+        <span className={style.label}>Name:</span>
+        <span className={style.value}>{patient.name}</span>
+      </div>
+
+      <div className={style.divider} />
+
+      <div className={style.infoItem}>
+        <FaClock className={style.icon} />
+        <span className={style.label}>Age:</span>
+        <span className={style.value}>{patient.age}y</span>
+      </div>
+
+      <div className={style.divider} />
+
+      <div className={style.infoItem}>
+        <FaVenusMars className={style.icon} />
+        <span className={style.label}>Gender:</span>
+        <span className={style.value}>{patient.gender}</span>
+      </div>
+
+      <div className={style.divider} />
+
+      <div className={style.infoItem}>
+        <FaPhoneAlt className={style.icon} />
+        <span className={style.label}>Phone:</span>
+        <span className={style.value}>{patient.phone}</span>
+      </div>
+    </div>
+  );
+}

@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import styles from '../css/Navbar.module.css';
-import { FaChevronDown, FaPlus, FaSearch, FaUserAlt } from "react-icons/fa";
+import { FaChevronDown, FaPlus, FaUserAlt } from "react-icons/fa";
 import type { LabPatientDetails } from '../screens/home/types/patient';
 import { useMemo, useState } from 'react';
 import ButtonWithTextAndImage from '../common/buttonWithTextAndImage';
+import SearchInput from '../common/SearchInput';
 
 type Props = {
     patients: LabPatientDetails[];
@@ -15,7 +16,7 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
 
     // Filter patients based on search input
     const filteredPatients = useMemo(() => {
-        return patients.filter(p => 
+        return patients.filter(p =>
             p.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
     }, [patients, searchQuery]);
@@ -33,29 +34,26 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
 
             {/* The Hover Menu */}
             <div className={styles.dropdownMenu}>
+
+                {/* 2. Search Functionality */}
+                <div className={styles.searchSection}>
+                <SearchInput
+                    placeholder="Search by name..."
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                />
+                </div>
+
                 {/* 1. Add Button at the TOP */}
                 <div className={styles.menuHeaderSection}>
                     <ButtonWithTextAndImage
-                            text="Add Lab Result"
-                            icon={<FaPlus color='blue' />}
-                            variant="primary"
-                            onClick={onPlusTapped}
-                          />
-                </div>
-
-                {/* 2. Search Functionality */}
-                <div className={styles.searchBox}>
-                    <FaSearch className={styles.searchIcon} />
-                    <input 
-                        type="text" 
-                        placeholder="Search by name..." 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className={styles.searchInput}
-                        onClick={(e) => e.stopPropagation()} // Prevent closing if clicked
+                        text="Add Lab Result"
+                        icon={<FaPlus color='blue' />}
+                        variant="secondary"
+                        onClick={onPlusTapped}
                     />
                 </div>
-                
+
                 {/* 3. Filtered Patient List */}
                 <div className={styles.patientList}>
                     {filteredPatients.length > 0 ? (
