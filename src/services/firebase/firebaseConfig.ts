@@ -1,14 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
+const apiKey = import.meta.env.VITE_API_FIREBASE_API_KEY;
+const authDomain = import.meta.env.VITE_API_FIREBASE_AUTH_DOMAIN;
+const projectId = import.meta.env.VITE_API_FIREBASE_PROJECT_ID;
+const storageBucket = import.meta.env.VITE_API_FIREBASE_STORAGE_BUCKET;
+const messagingSenderId = import.meta.env.VITE_API_FIREBASE_MESSAGING_SENDER_ID;
+const appId = import.meta.env.VITE_API_FIREBASE_APP_ID;
+const measurementId = import.meta.env.VITE_API_FIREBASE_MEASUREMENT_ID;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDMQg5ppvrRf30VJGwfhEZBj32_2oG7i1U",
-  authDomain: "labproject-6930f.firebaseapp.com",
-  projectId: "labproject-6930f",
-  storageBucket: "labproject-6930f.firebasestorage.app",
-  messagingSenderId: "585219397070",
-  appId: "1:585219397070:web:90e9d44ee7b8d78996c79f",
-  measurementId: "G-PMQ155J3P9"
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
+  measurementId: measurementId
 };
 
 // Initialize Firebase
