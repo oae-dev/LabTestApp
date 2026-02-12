@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
 import LabSearchPicker from './LabSearchPicker';
 import { LAB_TESTS } from '../types/test';
-import TestChips from './testChips';
 import type { LabPatientDetails } from '../types/patient';
 import TestGrouping from './TestGrouping';
 
@@ -19,16 +17,22 @@ type Props = {
 export default function TestDetails({ patient, state, onChange }: Props) {
   const { selectedCats, selectedTestIds, testValues } = state;
 
-  const toggleTest = (id: string) => {
-    const nextIds = selectedTestIds.includes(id)
-      ? selectedTestIds.filter(tid => tid !== id)
-      : [...selectedTestIds, id];
+  const toggleTest = (testId: string) => {
+  const nextTestIds = selectedTestIds.includes(testId)
+    ? selectedTestIds.filter(id => id !== testId)
+    : [...selectedTestIds, testId];
 
-    onChange({
-      ...state,
-      selectedTestIds: nextIds,
-    });
-  };
+  // derive selected categories from selected tests
+  const nextSelectedCats = LAB_TESTS
+    .filter(cat => cat.tests.some(t => nextTestIds.includes(t.id)))
+    .map(cat => cat.id);
+
+  onChange({
+    ...state,
+    selectedTestIds: nextTestIds,
+    selectedCats: nextSelectedCats,
+  });
+};
 
 
   const handleInputChange = (testId: string, fieldKey: string, value: string) => {
@@ -42,55 +46,21 @@ export default function TestDetails({ patient, state, onChange }: Props) {
   };
 
 
-  const testsToSelectFrom = useMemo(() => {
-    return LAB_TESTS.filter(cat => selectedCats.includes(cat.id));
-  }, [selectedCats]);
+  // const testsToSelectFrom = useMemo(() => {
+  //   return LAB_TESTS.filter(cat => selectedCats.includes(cat.id));
+  // }, [selectedCats]);
 
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
-      <h1 className="test-heading">Select Tests for {patient.name}</h1>
-
-      <LabSearchPicker
-        selectedCats={selectedCats}
-        onChange={(nextCats) => {
-          // find categories that were REMOVED
-          const removedCats = selectedCats.filter(
-            catId => !nextCats.includes(catId)
-          );
-
-          // collect all test IDs under removed categories
-          const removedTestIds = LAB_TESTS
-            .filter(cat => removedCats.includes(cat.id))
-            .flatMap(cat => cat.tests.map(t => t.id));
-
-          // clean selected tests
-          const nextSelectedTestIds = selectedTestIds.filter(
-            id => !removedTestIds.includes(id)
-          );
-
-          // clean test values
-          const nextTestValues = Object.fromEntries(
-            Object.entries(testValues).filter(
-              ([key]) => !removedTestIds.some(id => key.startsWith(id + '-'))
-            )
-          );
-
-          onChange({
-            selectedCats: nextCats,
-            selectedTestIds: nextSelectedTestIds,
-            testValues: nextTestValues,
-          });
-        }}
-      />
+    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', gap:'10px'}}>
 
       {/* Category Selection Result (Chips) */}
-      {selectedCats.length > 0 && (
+      {/* {selectedCats.length > 0 && (
         <TestChips
           testsToSelectFrom={testsToSelectFrom}
           toggleTest={toggleTest}
           selectedTestIds={selectedTestIds}
         />
-      )}
+      )} */}
 
       {/* Entry List Grouped by Category */}
 
@@ -104,6 +74,11 @@ export default function TestDetails({ patient, state, onChange }: Props) {
         patientAge={patient.age}
       />
 
+        <LabSearchPicker
+        selectedCats={selectedCats}
+        selectedTestIds={selectedTestIds}
+        onTestToggle={toggleTest}
+      />
 
     </div>
   );

@@ -1,162 +1,131 @@
 .container {
-  position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 30vw;
+  background: transparent;
 }
 
+/* Search Bar Styling */
 .searchWrapper {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 6px 10px;
-  transition: all 0.2s ease;
-}
-
-.searchWrapper.active {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .searchIcon {
-  padding: 0 10px;
   color: #94a3b8;
+  margin-right: 12px;
 }
 
 .input {
-  flex: 1;
   border: none;
   outline: none;
-  font-size: 16px;
-  color: #1e293b;
-  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 15px;
+  padding: 8px 0;
 }
 
-.pickerTrigger {
+/* Accordion List */
+.categoryList {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 8px;
-  background: #f1f5f9;
-  border: none;
-  padding: 8px 16px;
+}
+
+.accordionItem {
+  background: white;
+  border: 1px solid #eef2f6;
   border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.categoryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
   cursor: pointer;
-  color: #475569;
-  font-weight: 600;
   transition: background 0.2s;
 }
 
-.pickerTrigger.hasSelection {
-  background: #dbeafe;
-  color: #2563eb;
-}
-
-.pickerTrigger:hover {
-  background: #e2e8f0;
-}
-
-.arrow {
-  display: inline-block;
-  transition: transform 0.2s;
-}
-
-.arrow.up {
-  transform: rotate(180deg);
-}
-
-/* Dropdown Styles */
-.dropdown {
-  position: absolute;
-  top: 110%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 50;
-}
-
-.dropdownHeader {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 16px;
+.categoryRow:hover {
   background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
 }
 
-.headerTitle {
-  font-size: 12px;
-  font-weight: 700;
-  color: #64748b;
-  text-transform: uppercase;
+.activeRow {
+  background: #f1f5f9; /* Matches the highlight in your image */
 }
 
-.resetBtn {
-  background: none;
-  border: none;
-  color: #3b82f6;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 16px;
-}
-
-.card {
+.leftInfo {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  background: #f8fafc;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
+  gap: 12px;
 }
 
-.card:hover {
-  background: #f1f5f9;
-}
-
-.cardSelected {
-  background: #eff6ff;
-  border-color: #3b82f6;
+.iconBox {
+  color: #64748b;
+  font-size: 14px;
 }
 
 .catName {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #1e293b;
+  font-size: 15px;
 }
 
-.catCount {
-  margin: 4px 0 0 0;
+.rightInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkIcon {
+  color: #3b82f6;
+  font-size: 14px;
+}
+
+.chevron {
   font-size: 12px;
-  color: #64748b;
+  color: #94a3b8;
+  transition: transform 0.3s;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* Expanded Content Area */
+.expandedContent {
+  padding: 12px 16px 16px 42px; /* Indent tests to align under name */
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.testLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #475569;
 }
 
 .checkbox {
-  width: 20px;
-  height: 20px;
-  border-radius: 6px;
-  background: #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+  cursor: pointer;
 }
 
-.cardSelected .checkbox {
-  background: #3b82f6;
+.testName:hover {
+  color: #1e293b;
 }
