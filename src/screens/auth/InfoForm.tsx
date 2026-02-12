@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styles from '../../css/LabInfo.module.css';
 import DynamicButton from '../../common/dynamicButton';
 import { RxCross2 } from 'react-icons/rx';
-import { saveLabInfo } from '../../localStorage/LabInfo';
 import { validateLabInfo } from './functionality/auth';
 import { useNavigate } from 'react-router-dom';
+import { saveUserToLocalStorage, STORAGE_KEY_USER } from '../../localStorage/UserInfo';
 
 export default function InfoForm() {
     const navigate = useNavigate();
@@ -33,21 +33,30 @@ export default function InfoForm() {
     };
 
     const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const { isValid, errors } = validateLabInfo(form);
+        const { isValid, errors } = validateLabInfo(form);
 
-    if (!isValid) {
-        const firstError = Object.values(errors)[0];
-        alert(firstError);
-        return;
-    }
+        if (!isValid) {
+            const firstError = Object.values(errors)[0];
+            alert(firstError);
+            return;
+        }
 
-    saveLabInfo(form);
-    alert('Lab information saved successfully');
-    navigate('/home');
+        const storedUser = localStorage.getItem(STORAGE_KEY_USER);
+        if (!storedUser) return;
 
-};
+        const user = JSON.parse(storedUser);
+
+        const updatedUser = {
+            ...user,
+            labInfo: form, 
+        };
+
+        saveUserToLocalStorage(updatedUser);
+        navigate('/home');
+
+    };
 
     return (
         <div className={styles.pageWrapper}>

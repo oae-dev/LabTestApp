@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, type User } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebaseConfig";
 import type { LabInfo } from "../../home/types/labDetails";
+import { saveUserToLocalStorage, type StoredUser } from "../../../localStorage/UserInfo";
 // import { User } from "firebase/auth";
 
 
@@ -66,7 +67,15 @@ const loginUser = async (
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     console.log(userCredential.user);
-    saveUserToLocalStorage(userCredential.user);
+    // Save user info to local storage
+    const userData: StoredUser = {
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      // accessToken: userCredential.user.refreshToken,
+      labInfo: undefined, 
+    };
+    saveUserToLocalStorage(userData);
+
     return { success: true, message: 'Logged in successfully' }
   } catch (error) {
     console.log(error);
@@ -98,7 +107,16 @@ const signUp = async (
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password)
     console.log(userCredential.user);
-    saveUserToLocalStorage(userCredential.user);
+
+    // Save user info to local storage
+    const userData: StoredUser = {
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      // accessToken: userCredential.user.refreshToken,
+      labInfo: undefined, 
+    };
+    saveUserToLocalStorage(userData);
+
     return { success: true, message: 'Account created successfully' }
   } catch (error) {
     console.log(error);
@@ -111,9 +129,21 @@ const signUp = async (
 export const onGooglePress = async (): Promise<FunctionResult> => {
   try {
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    console.log('✅ Firebase user (web):', result.user);
-    saveUserToLocalStorage(result.user);
+    const userCredential = await signInWithPopup(auth, provider);
+    console.log('✅ Firebase user (web):', userCredential.user);
+
+     const stored = localStorage.getItem("user");
+  const existingUser = stored ? JSON.parse(stored) : {};
+
+    // Save user info to local storage
+    const userData: StoredUser = {
+      ...existingUser, 
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      // accessToken: userCredential.user.refreshToken,
+    };
+    saveUserToLocalStorage(userData);
+
     return { success: true, message: 'Logged in successfully' }
   } catch (error) {
     console.log(error);
@@ -123,39 +153,39 @@ export const onGooglePress = async (): Promise<FunctionResult> => {
 }
 
 
-type StoredUser = {
-  uid: string;
-  email: string | null;
-  accessToken: string;
-};
-const saveUserToLocalStorage = async (user: User): Promise<void> => {
-  const accessToken = await user.getIdToken();
+// type StoredUser = {
+//   uid: string;
+//   email: string | null;
+//   accessToken: string;
+// };
+// const saveUserToLocalStorage = async (user: User): Promise<void> => {
+//   const accessToken = await user.getIdToken();
 
-  const userData: StoredUser = {
-    uid: user.uid,
-    email: user.email,
-    accessToken,
-  };
+//   const userData: StoredUser = {
+//     uid: user.uid,
+//     email: user.email,
+//     accessToken,
+//   };
 
-  localStorage.setItem("user", JSON.stringify(userData));
-};
+//   localStorage.setItem("user", JSON.stringify(userData));
+// };
 
 
 
 // Form Functionality related to authentication screens.
 
 export const validateLabInfo = (form: LabInfo) => {
-    const errors: Record<string, string> = {};
+  const errors: Record<string, string> = {};
 
-    if (!form.logo) errors.logo = 'Laboratory logo is required';
-    if (!form.labName.trim()) errors.labName = 'Lab name is required';
-    if (!form.email.trim()) errors.email = 'Email is required';
-    if (form.email && !isValidEmail(form.email)) errors.email = 'Please enter a valid email';
-    if (!form.phone.trim()) errors.phone = 'Phone number is required';
-    if (!form.address.trim()) errors.address = 'Address is required';
+  if (!form.logo) errors.logo = 'Laboratory logo is required';
+  if (!form.labName.trim()) errors.labName = 'Lab name is required';
+  if (!form.email.trim()) errors.email = 'Email is required';
+  if (form.email && !isValidEmail(form.email)) errors.email = 'Please enter a valid email';
+  if (!form.phone.trim()) errors.phone = 'Phone number is required';
+  if (!form.address.trim()) errors.address = 'Address is required';
 
-    return {
-        isValid: Object.keys(errors).length === 0,
-        errors,
-    };
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors,
+  };
 };

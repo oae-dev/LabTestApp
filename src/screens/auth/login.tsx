@@ -6,6 +6,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import InputFieldWithEndLogo from '../../common/inputFieldWithEndLogo';
 import { onGooglePress, onLoginTapped } from './functionality/auth';
 import googleLogo from '../../assets/googleLogo.png';
+import { STORAGE_KEY_USER } from '../../localStorage/UserInfo';
 
 export default function Login({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
     const navigate = useNavigate();
@@ -15,7 +16,17 @@ export default function Login({ setLoading }: { setLoading: React.Dispatch<React
     const loginTapped = async () => {
         const result = await onLoginTapped({ email, password, setLoading });
         if (result.success) {
-            navigate('/labForm', { replace: true });
+            const storedUser = localStorage.getItem(STORAGE_KEY_USER);
+
+            if (!storedUser) return;
+
+            const user = JSON.parse(storedUser);
+
+            if (!user.labInfo) {
+                navigate('/labForm');
+            } else {
+                navigate('/home', { replace: true});
+            }
         } else {
             alert(result.message);
         }

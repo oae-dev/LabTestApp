@@ -22,7 +22,7 @@ export default function SignUp({ setLoading }: { setLoading: React.Dispatch<Reac
     const googleLogin = async () => {
         const result = await onGooglePress();
         if (result.success) {
-            navigate('/home', { replace: true });
+            navigate('/labForm', { replace: true });
         } else {
             alert(result.message)
         }

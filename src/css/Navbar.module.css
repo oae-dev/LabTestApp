@@ -1,0 +1,176 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e2e8f0;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand Styling */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 45px;
+  width: 45px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.logoPlaceholder {
+  height: 40px;
+  width: 40px;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.labName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1;
+}
+
+.status {
+  font-size: 11px;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Contact Info Styling */
+.infoGroup {
+  display: flex;
+  gap: 40px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.details span {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.addressText {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.patientDropDown {
+  position: relative;
+  display: inline-block;
+}
+
+.patientBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  
+  /* Dimensions & Spacing */
+  min-width: 140px;
+  padding: 8px 16px;
+  
+  /* Look & Feel */
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  
+  /* Text Styling */
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  
+  /* Smooth transition for hover */
+  transition: all 0.2s ease;
+}
+
+.btnContent {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between 👤 and Patients */
+}
+
+.userIcon {
+  font-size: 13px;
+  color: #64748b; /* Soft gray for the icon */
+}
+
+.arrowIcon {
+  font-size: 10px;
+  color: #94a3b8; /* Lighter gray for the arrow */
+  transition: transform 0.2s ease;
+}
+
+/* Hover State */
+.patientBtn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* Active/Open State (Add this class when your dropdown is open) */
+.activeBtn {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.activeBtn .arrowIcon {
+  transform: rotate(180deg);
+  color: #3b82f6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .infoGroup { display: none; } /* Hide info on smaller tablets */
+}

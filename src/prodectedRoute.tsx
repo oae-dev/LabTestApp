@@ -1,12 +1,19 @@
 import { Navigate } from "react-router";
 import { Outlet } from "react-router-dom";
+import { STORAGE_KEY_USER } from "./localStorage/UserInfo";
 
 export default function ProtectedRoute() {
-const user = localStorage.getItem("user");
+const storedUser = localStorage.getItem(STORAGE_KEY_USER);
 
-  if (!user) {
-    return <Navigate to="/" />;
-  }
+if (!storedUser) {
+  return <Navigate to="/" />;
+}
+
+const user = JSON.parse(storedUser);
+
+if (!user.labInfo) {
+  return <Navigate to="/labForm" />;
+}
   
   return <Outlet />;
 }
