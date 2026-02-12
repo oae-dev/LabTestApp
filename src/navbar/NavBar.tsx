@@ -1,8 +1,15 @@
-import { STORAGE_KEY_USER, type StoredUser } from "./localStorage/UserInfo";
-import styles from './css/Navbar.module.css';
-import { FaChevronDown, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaUserAlt } from "react-icons/fa";
+import { STORAGE_KEY_USER, type StoredUser } from "../localStorage/UserInfo";
+import styles from '../css/Navbar.module.css';
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import PatientDropDown from "./PatientDropDown";
+import type { LabPatientDetails } from "../screens/home/types/patient";
 
-export default function NavBar() {
+type Props = {
+    patients: LabPatientDetails[];
+    onPlusTapped?: () => void;
+}
+
+export default function NavBar({ patients, onPlusTapped }: Props) {
     const storedUser = localStorage.getItem(STORAGE_KEY_USER);
     if (!storedUser) return;
     const user: StoredUser = JSON.parse(storedUser);
@@ -57,15 +64,7 @@ export default function NavBar() {
                 </div>
 
                 {/* Patient Dropdown */}
-                <div className={styles.patientDropDown}>
-                    <button className={styles.patientBtn}>
-                        <span className={styles.btnContent}>
-                            <FaUserAlt className={styles.userIcon} />
-                            <span>Patients</span>
-                        </span>
-                        <FaChevronDown className={styles.arrowIcon} />
-                    </button>
-                </div>
+                <PatientDropDown patients={patients} onPlusTapped={onPlusTapped} />
             </div>
         </nav>
     );

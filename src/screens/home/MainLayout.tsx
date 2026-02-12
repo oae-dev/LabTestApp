@@ -7,7 +7,7 @@ import LabPatientForm from './components/PaisentDetailForm'
 import { type LabPatientDetails } from './types/patient'
 import type { PatientTestsMap } from './types/test'
 import { loadPatients, savePatients } from '../../localStorage/patientInfo'
-import NavBar from '../../NavBar'
+import NavBar from '../../navbar/NavBar'
 
 
 export default function MainLayout() {
@@ -19,7 +19,7 @@ export default function MainLayout() {
   return (
     <>
       <header className='main-layout-header'>
-        <NavBar />
+        <NavBar patients={patients} onPlusTapped={() => setOverlayVisible(true)}/>
       </header>
       <Overlay
         isOpen={overLayVisible}

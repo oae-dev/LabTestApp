@@ -174,3 +174,119 @@
 @media (max-width: 900px) {
   .infoGroup { display: none; } /* Hide info on smaller tablets */
 }
+
+.patientDropDownContainer {
+    position: relative;
+    display: inline-block;
+}
+
+/* Hover Menu Styling */
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Align to right since it's at the end of navbar */
+    width: 260px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding: 8px 0;
+    
+    /* Hover Magic */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.patientDropDownContainer:hover .dropdownMenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.patientDropDownContainer:hover .arrowIcon {
+    transform: rotate(180deg);
+}
+
+.menuHeader {
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    letter-spacing: 0.5px;
+}
+
+.patientList {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.patientLink {
+    display: block;
+    text-decoration: none;
+    padding: 12px 16px;
+    color: #1e293b;
+    transition: background 0.2s;
+}
+
+.patientLink:hover { background: #f8fafc; }
+.activeLink { background: #eff6ff; border-left: 4px solid #3b82f6; }
+
+.patientItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.patientAge { color: #94a3b8; font-size: 12px; }
+
+.menuFooter {
+    padding: 12px 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.addBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: #0067ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.addBtn:hover { background: #0056d6; }
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    margin: 7px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.searchIcon {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    width: 100%;
+    color: #1e293b;
+}
