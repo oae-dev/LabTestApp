@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
-import { FaChevronDown, FaFlask, FaSearch, FaCheckCircle } from 'react-icons/fa';
+import { FaChevronDown, FaFlask, FaCheckCircle } from 'react-icons/fa';
 import styles from '../../../css/SearchPicker.module.css';
 import { LAB_TESTS } from '../types/test';
+import SearchInput from '../../../common/SearchInput';
 
 type Props = {
   selectedCats: string[];
@@ -26,14 +27,14 @@ const LabSearchPicker = ({ selectedCats, selectedTestIds, onTestToggle }: Props)
   return (
     <div className={styles.container}>
       <div className={styles.searchWrapper}>
-        <FaSearch className={styles.searchIcon} />
-        <input
+        <SearchInput value={query} onChange={setQuery} placeholder="Search categories..." />
+        {/* <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search categories..."
           className={styles.input}
-        />
+        /> */}
       </div>
 
       <div className={styles.categoryList}>

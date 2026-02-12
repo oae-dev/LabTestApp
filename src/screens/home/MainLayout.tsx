@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom'
-import LabSideBar from './LabSideBar'
 import '../../css/mainLayout.css'
 import { useState } from 'react'
 import Overlay from '../../common/overlay'
@@ -21,10 +20,9 @@ export default function MainLayout() {
       <header className='main-layout-header'>
         <NavBar patients={patients} onPlusTapped={() => setOverlayVisible(true)}/>
       </header>
-      <Overlay
-        isOpen={overLayVisible}
-        onClose={() => setOverlayVisible(false)}
-      >
+
+
+      <Overlay isOpen={overLayVisible} onClose={() => setOverlayVisible(false)} >
         <LabPatientForm onSubmit={(data) => {
           setPatients((prev) => {
             const updated = [
@@ -37,12 +35,10 @@ export default function MainLayout() {
 
           setOverlayVisible(false);
         }} onClose={() => setOverlayVisible(false)} />
+
       </Overlay>
-      <div className='main-layout-wrapper'>
-        <aside className='sidebar'>
-          <LabSideBar patients={patients} onPlusTapped={() => setOverlayVisible(true)} />
-        </aside>
-        <main style={{ display: 'flex', width: '100%' }}>
+
+        <main className='main-layout-wrapper'>
           <Outlet
             context={{
               patientTests,
@@ -50,7 +46,7 @@ export default function MainLayout() {
             }}
           />
         </main>
-      </div>
+
     </>
   )
 }

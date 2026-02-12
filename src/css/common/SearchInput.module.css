@@ -1,0 +1,39 @@
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 4px 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+  width: 100%; /* Default to fill container */
+}
+
+/* Professional blue glow when user clicks to type */
+.searchWrapper:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  padding: 8px 0;
+  color: #1e293b;
+  background: transparent;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.searchIcon {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-left: 12px;
+  flex-shrink: 0; /* Prevents icon from squishing on small screens */
+}
