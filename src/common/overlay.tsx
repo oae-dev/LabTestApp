@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import styles from "../css/common/Overlay.module.css";
+import { useRef } from "react";
+import styles from "./Overlay.module.css";
 
 type OverlayProps = {
   isOpen: boolean;
