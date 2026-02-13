@@ -30,7 +30,7 @@ export default function LabPatientForm({ onSubmit, onClose }: Props) {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(form);
   };

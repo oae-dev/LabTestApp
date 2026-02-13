@@ -28,13 +28,6 @@ const LabSearchPicker = ({ selectedCats, selectedTestIds, onTestToggle }: Props)
     <div className={styles.container}>
       <div className={styles.searchWrapper}>
         <SearchInput value={query} onChange={setQuery} placeholder="Search categories..." />
-        {/* <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search categories..."
-          className={styles.input}
-        /> */}
       </div>
 
       <div className={styles.categoryList}>

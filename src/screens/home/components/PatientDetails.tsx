@@ -2,7 +2,7 @@ import { type LabPatientDetails } from '../types/patient';
 import { FaUser, FaPhoneAlt, FaClock, FaVenusMars } from 'react-icons/fa';
 import style from '../../../css/PatientHomeDetail.module.css';
 
-export default function PaisentDetails({ patient }: { patient: LabPatientDetails }) {
+export default function PatientDetails({ patient }: { patient: LabPatientDetails }) {
   return (
     <div className={style.compactContainer}>
       <div className={style.infoItem}>

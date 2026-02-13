@@ -7,8 +7,8 @@ import '../../css/print/print.css';
 import PrintTestDetails from './printOnlyComponents/PrintTestDetails';
 import LabSearchPicker from './components/LabSearchPicker';
 import TestGrouping from './components/TestGrouping';
-import PrintPaisentDetails from './printOnlyComponents/PrintPaisentDetails';
-import PaisentDetails from './components/PatientDetails';
+import PatientDetails from './components/PatientDetails';
+import PrintPatientDetails from './printOnlyComponents/PrintPatientDetails';
 
 type OutletContextType = {
   patientTests: PatientTestsMap;
@@ -68,13 +68,14 @@ export default function Home() {
     <>
       {/* PRINT UI */}
       <div className="print-only">
-        <PrintPaisentDetails patient={patient} />
+        <PrintPatientDetails patient={patient} />
         <hr />
         <PrintTestDetails
           selectedTestIds={state.selectedTestIds}
           testValues={state.testValues}
         />
       </div>
+
       {/* SCREEN UI */}
       <div className="screen-only" style={{ display: 'flex', width: '100%', height: '100%' }}>
 
@@ -91,7 +92,7 @@ export default function Home() {
         <main style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '10px 20px', position: 'relative' }}>
 
 
-          <PaisentDetails patient={patient} />
+          <PatientDetails patient={patient} />
           <hr />
           <TestGrouping
             selectedTestIds={state.selectedTestIds}

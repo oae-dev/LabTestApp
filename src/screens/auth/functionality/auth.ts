@@ -132,15 +132,15 @@ export const onGooglePress = async (): Promise<FunctionResult> => {
     const userCredential = await signInWithPopup(auth, provider);
     console.log('✅ Firebase user (web):', userCredential.user);
 
-     const stored = localStorage.getItem("user");
-  const existingUser = stored ? JSON.parse(stored) : {};
+    //  const stored = localStorage.getItem(STORAGE_KEY_USER);
+  // const existingUser = stored ? JSON.parse(stored) : {};
 
     // Save user info to local storage
     const userData: StoredUser = {
-      ...existingUser, 
       uid: userCredential.user.uid,
       email: userCredential.user.email,
       // accessToken: userCredential.user.refreshToken,
+      labInfo: undefined, 
     };
     saveUserToLocalStorage(userData);
 
