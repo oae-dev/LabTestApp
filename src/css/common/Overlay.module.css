@@ -11,10 +11,7 @@
 .content {
   background: #ffffff;
   border-radius: 10px;
-  padding: 20px;
   min-width: 320px;
-  max-width: 90vw;
-  max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }

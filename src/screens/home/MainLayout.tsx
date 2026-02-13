@@ -17,7 +17,7 @@ export default function MainLayout() {
 
   return (
     <>
-      <header className='main-layout-header'>
+      <header className='main-layout-header screen-only'>
         <NavBar patients={patients} onPlusTapped={() => setOverlayVisible(true)}/>
       </header>
 

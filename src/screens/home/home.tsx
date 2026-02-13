@@ -77,11 +77,10 @@ export default function Home() {
       <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '10px 20px', position: 'relative' }}>
 
 
-        <PaisentDetails patient={patient} />
-        <hr />
-
         {/* SCREEN UI */}
         <div className="screen-only">
+          <PaisentDetails patient={patient} />
+        <hr />
           <TestGrouping
             selectedTestIds={state.selectedTestIds}
             testValues={state.testValues}

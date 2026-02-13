@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../../css/LabPatientForm.module.css";
 import { ImCross } from "react-icons/im";
 import type { LabPatientDetails } from "../types/patient";
+import DynamicButton from "../../../common/dynamicButton";
 
 type Props = {
   onSubmit: (data: LabPatientDetails) => void;
@@ -36,96 +37,61 @@ export default function LabPatientForm({ onSubmit, onClose }: Props) {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      {/* Header */}
+      {/* Modern Blue Header */}
       <div className={styles.header}>
-        <h2>Add New Patient</h2>
-        <button type="button" className={styles.close} onClick={onClose}>
-          <ImCross color="red" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '20px' }}>📋</span>
+          <h2>Patient Detail Information</h2>
+        </div>
+        <button type="button" className={styles.close} onClick={onClose} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+          <ImCross size={12} color="white" />
         </button>
       </div>
 
-      {/* Fields */}
-      <div className={styles.field}>
-        <label>Patient Name</label>
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Enter patient name"
-          required
-        />
-      </div>
-
-      <div className={styles.row}>
+      <div className={styles.formBody}>
+        {/* Box 1: Primary Info */}
         <div className={styles.field}>
-          <label>Age</label>
-          <input
-            type="number"
-            name="age"
-            value={form.age || ""}
-            onChange={handleChange}
-            placeholder="Age"
-            required
-          />
+          <label>Patient Name *</label>
+          <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required />
         </div>
 
         <div className={styles.field}>
-          <label>Gender</label>
-          <select
-            name="gender"
-            value={form.gender}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
+          <label>Age & Gender *</label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <input type="number" name="age" placeholder="Age" value={form.age || ""} onChange={handleChange} required />
+            <select name="gender" value={form.gender} onChange={handleChange} required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div className={styles.field}>
+          <label>Phone Number *</label>
+          <input name="phone" placeholder="Contact No" value={form.phone} onChange={handleChange} required />
+        </div>
+
+        {/* Box 2: Secondary Info */}
+        <div className={styles.field}>
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="email@lab.com" value={form.email} onChange={handleChange} />
+        </div>
+
+        <div className={`${styles.field} ${styles.fullWidth}`}>
+          <label>Residential Address</label>
+          <textarea name="address" placeholder="Full Address Details..." value={form.address} onChange={handleChange} rows={2} />
         </div>
       </div>
 
-      <div className={styles.field}>
-        <label>Phone Number</label>
-        <input
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          placeholder="Phone number"
-          required
-        />
-      </div>
-
-      <div className={styles.field}>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Email address"
-        />
-      </div>
-
-      <div className={styles.field}>
-        <label>Address</label>
-        <textarea
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-          placeholder="Full address"
-          rows={3}
-        />
-      </div>
-
-      {/* Actions */}
+      {/* Action Bar with Success Indicator */}
       <div className={styles.actions}>
-        <button type="button" className={styles.cancel} onClick={onClose}>
+        <DynamicButton type="button" color="white" backgroundColor="#f6513b" onClick={onClose} >
           Cancel
-        </button>
-        <button type="submit" className={styles.save}>
-          Save Patient
-        </button>
+          </DynamicButton>
+          <DynamicButton type="submit" color="white" backgroundColor="#3b82f6">
+          Add Patient
+        </DynamicButton>
       </div>
     </form>
   );
