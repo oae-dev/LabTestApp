@@ -65,22 +65,34 @@ export default function Home() {
 
 
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100%' }}>
-      <aside className='sidebar'>
-        <LabSearchPicker
-          selectedCats={state.selectedCats}
-          selectedTestIds={state.selectedTestIds}
-          onTestToggle={toggleTest}
-        />
-      </aside>
-
-      <div style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '10px 20px', position: 'relative' }}>
-
-
-        {/* SCREEN UI */}
-        <div className="screen-only">
-          <PaisentDetails patient={patient} />
+    <>
+      {/* PRINT UI */}
+      <div className="print-only">
+        <PrintPaisentDetails patient={patient} />
         <hr />
+        <PrintTestDetails
+          selectedTestIds={state.selectedTestIds}
+          testValues={state.testValues}
+        />
+      </div>
+      {/* SCREEN UI */}
+      <div className="screen-only" style={{ display: 'flex', width: '100%', height: '100%' }}>
+
+        {/* Sidebar for Test Selection */}
+        <aside className='sidebar'>
+          <LabSearchPicker
+            selectedCats={state.selectedCats}
+            selectedTestIds={state.selectedTestIds}
+            onTestToggle={toggleTest}
+          />
+        </aside>
+
+        {/* Main Content Area */}
+        <main style={{ display: 'flex', width: '100%', flexDirection: 'column', overflowY: 'auto', padding: '10px 20px', position: 'relative' }}>
+
+
+          <PaisentDetails patient={patient} />
+          <hr />
           <TestGrouping
             selectedTestIds={state.selectedTestIds}
             testValues={state.testValues}
@@ -90,24 +102,14 @@ export default function Home() {
             patientGender={patient.gender}
             patientAge={patient.age}
           />
-        </div>
-
-
-        {/* PRINT UI */}
-        <div className="print-only">
-          <PrintPaisentDetails patient={patient} />
-        <hr />
-          <PrintTestDetails
-            selectedTestIds={state.selectedTestIds}
-            testValues={state.testValues}
-          />
-        </div>
+        </main>
 
         <div style={{
           position: 'fixed',
           bottom: '20px',
           right: '35px'
-        }}><ButtonWithTextAndImage
+        }}>
+          <ButtonWithTextAndImage
             text='Print'
             icon={<TiPrinter />}
             variant='primary'
@@ -115,8 +117,7 @@ export default function Home() {
           />
         </div>
       </div>
-
-    </div>
+    </>
 
   )
 }

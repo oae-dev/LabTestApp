@@ -1,35 +1,95 @@
 .root {
-  margin-top: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    color: #1a1a1a;
+    line-height: 1.4;
 }
 
-.category {
-  margin-bottom: 24px;
-  page-break-inside: avoid;
+/* Page Break Logic */
+.categoryBlock {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    width: 100%;
 }
 
+/* Category Title: Professional Header Style */
 .categoryTitle {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #000;
-  padding-bottom: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16pt;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    padding: 10px 0;
+    border-top: 2.5px solid #000;
+    border-bottom: 2.5px solid #000;
+    letter-spacing: 1.5px;
 }
 
+.testWrapper {
+    margin-bottom: 25px;
+}
+
+/* Test Name: Sub-header style */
+.testName {
+    text-align: center;
+    font-size: 12pt;
+    font-weight: 700;
+    padding: 6px;
+    background-color: #f1f5f9; /* Light slate background */
+    border: 1.5px solid #000;
+    border-bottom: none;
+    margin: 0;
+}
+
+/* Table Design */
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+    table-layout: fixed; /* Ensures consistent column widths */
 }
 
-.table th,
-.table td {
-  border: 1px solid #000;
-  padding: 6px 8px;
-  text-align: left;
+.table th, .table td {
+    border: 1px solid #000;
+    padding: 8px 12px;
 }
 
+/* Header Cells */
 .table th {
-  background-color: #f2f2f2;
-  font-weight: 600;
+    background-color: #e2e8f0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 9pt;
+    text-align: left;
+}
+
+/* Typography for Data */
+.fieldName {
+    font-weight: 600;
+    color: #000;
+    width: 35%;
+}
+
+.resultCell {
+    font-weight: 800;
+    font-size: 11.5pt; /* Make the result slightly larger */
+    text-align: center;
+    width: 20%;
+}
+
+.unitCell {
+    font-style: italic;
+    font-size: 10pt;
+    width: 15%;
+}
+
+.refCell {
+    font-size: 9.5pt;
+    color: #333;
+    width: 30%;
+}
+
+/* Avoid awkward breaks in rows */
+.table tr {
+    page-break-inside: avoid;
 }

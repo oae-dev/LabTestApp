@@ -6,10 +6,7 @@ type Props = {
     testValues: Record<string, string>;
 };
 
-export default function PrintTestDetails({
-    selectedTestIds,
-    testValues,
-}: Props) {
+export default function PrintTestDetails({ selectedTestIds, testValues }: Props) {
     const grouped = LAB_TESTS
         .map(cat => ({
             ...cat,
@@ -20,37 +17,39 @@ export default function PrintTestDetails({
     return (
         <div className={styles.root}>
             {grouped.map(cat => (
-                <div key={cat.id} className={styles.category}>
-                    <h3 className={styles.categoryTitle}>{cat.name}</h3>
-
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>Test</th>
-                                <th>Result</th>
-                                <th>Unit</th>
-                                <th>Reference</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {cat.tests.map(test =>
-                                test.fields.map(field => (
-                                    <tr key={test.id + field.key}>
-                                        <td>{test.name}</td>
-                                        <td>{testValues[`${test.id}-${field.key}`] || '-'}</td>
-                                        <td>{field.unit}</td>
-                                        <td>
-                                            {field.references
-                                                .map(r => `${r.min}-${r.max}`)
-                                                .join(', ')}
-                                        </td>
+                <section key={cat.id} className={styles.categoryBlock}>
+                    <h2 className={styles.categoryTitle}>{cat.name}</h2>
+                    
+                    {cat.tests.map(test => (
+                        <div key={test.id} className={styles.testWrapper}>
+                            <h3 className={styles.testName}>{test.name}</h3>
+                            <table className={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th className={styles.fieldName}>Investigation</th>
+                                        <th className={styles.resultCell}>Result</th>
+                                        <th className={styles.unitCell}>Unit</th>
+                                        <th className={styles.refCell}>Reference Range</th>
                                     </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody>
+                                    {test.fields.map(field => (
+                                        <tr key={field.key}>
+                                            <td className={styles.fieldName}>{field.label || field.key}</td>
+                                            <td className={styles.resultCell}>
+                                                {testValues[`${test.id}-${field.key}`] || '-'}
+                                            </td>
+                                            <td className={styles.unitCell}>{field.unit}</td>
+                                            <td className={styles.refCell}>
+                                                {field.references.map(r => `${r.min} - ${r.max}`).join(', ')}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ))}
+                </section>
             ))}
         </div>
     );
