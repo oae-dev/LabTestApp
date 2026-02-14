@@ -1,13 +1,15 @@
 import DynamicButton from '../../../common/buttons/dynamicButton';
-import type { ReferenceRule } from '../../tests/tests.type';
+import MatrixInput from '../../tests/fields/MatrixInput';
+import StandardInput from '../../tests/fields/StandardInput';
+import type { MatrixValue, ReferenceRule, TestField, TestValue } from '../../tests/tests.type';
 import { LAB_TESTS } from '../../tests/tests.utils';
 import styles from './TestReport.module.css';
 
 type Props = {
     selectedTestIds: string[];
-    testValues: Record<string, string>;
+    testValues: Record<string, TestValue>;
     toggleTest: (id: string) => void;
-    handleInputChange: (testId: string, fieldKey: string, value: string) => void;
+    handleInputChange: (testId: string, fieldKey: string, value: TestValue) => void;
     patientName: string;
     patientGender: 'male' | 'female' | '';
     patientAge?: number;
@@ -45,6 +47,35 @@ export default function TestReport({
     if (groupedSelection.length === 0) {
         return <p className={styles.empty}>No tests selected for {patientName}</p>;
     }
+    const renderFieldInput = (testId: string, field: TestField) => {
+        const value = testValues[`${testId}-${field.key}`];
+
+        switch (field.inputType) {
+            case 'matrix':
+                return (
+                    <MatrixInput
+                        label={field.label}
+                        rows={field.rows ?? []}
+                        columns={field.columns ?? []}
+                        value={value as MatrixValue | undefined}
+                        onChange={(val) => handleInputChange(testId, field.key, val)} 
+                        fieldKey={field.key}                    />
+                );
+
+            default:
+                return (
+                    <StandardInput
+                    label={field.label}
+                    unit={field.unit}
+                    inputType={field.inputType === 'number' ? 'number' : 'text'}
+                    value={typeof value === 'string' || typeof value === 'number' ? String(value) : ''}
+                    onChange={(val) => handleInputChange(testId, field.key, val)}
+                />
+                );
+        }
+    };
+
+
 
     return (
         <>
@@ -56,39 +87,32 @@ export default function TestReport({
                         <div key={test.id} className={styles.testCard}>
                             <div className={styles.testHeader}>
                                 <span className={styles.testName}>{test.name}</span>
-                                <DynamicButton 
-                                onClick={() => toggleTest(test.id)} 
-                                color='white' backgroundColor='#3b82f6'>
+                                <DynamicButton
+                                    onClick={() => toggleTest(test.id)}
+                                    color='white' backgroundColor='#3b82f6'>
                                     Remove</DynamicButton>
                             </div>
 
                             <div className={styles.fields}>
                                 {test.fields.map(field => (
                                     <div key={field.key} className={styles.fieldWrapper}>
-                                        <div className={styles.labelRow}>
-                                            <label className={styles.fieldLabel}>{field.label}</label>
-                                            <span className={styles.unitTag}>{field.unit}</span>
-                                        </div>
-
+                                        
                                         <div className={styles.inputContainer}>
-                                            <input
-                                                type="text"
-                                                className={styles.classicInput}
-                                                placeholder="Enter result..."
-                                                value={testValues[`${test.id}-${field.key}`] || ''}
-                                                onChange={(e) => handleInputChange(test.id, field.key, e.target.value)}
-                                            />
+                                            {renderFieldInput(test.id, field)}
                                         </div>
 
-                                        <div className={styles.referenceBox}>
-                                            <span className={styles.refLabel}>Ref Range:</span>
-                                            <span className={styles.refValue}>
-                                                {field.references
-                                                    .filter(ref => matchReference(ref, patientGender, patientAge))
-                                                    .map(ref => `${ref.min} - ${ref.max}`)
-                                                    .join(' | ') || 'N/A'}
-                                            </span>
-                                        </div>
+                                        {field.references && field.references.length > 0 && (
+                                            <div className={styles.referenceBox}>
+                                                <span className={styles.refLabel}>Ref Range:</span>
+                                                <span className={styles.refValue}>
+                                                    {field.references
+                                                        .filter(ref => matchReference(ref, patientGender, patientAge))
+                                                        .map(ref => `${ref.min} - ${ref.max}`)
+                                                        .join(' | ') || 'N/A'}
+                                                </span>
+                                            </div>
+                                        )}
+
                                     </div>
                                 ))}
                             </div>
@@ -99,3 +123,5 @@ export default function TestReport({
         </>
     );
 }
+
+

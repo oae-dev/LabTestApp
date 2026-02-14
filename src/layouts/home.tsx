@@ -3,13 +3,14 @@ import ButtonWithTextAndImage from '../common/buttons/buttonWithTextAndImage';
 import { TiPrinter } from 'react-icons/ti';
 import '../css/print.css';
 import TestReport from '../features/reports/components/TestReport';
-import type { PatientTestsMap } from '../features/tests/tests.type';
+import type { PatientTestsMap, TestValue } from '../features/tests/tests.type';
 import type { LabPatientDetails } from '../features/patients/patient.type';
 import { LAB_TESTS } from '../features/tests/tests.utils';
 import PrintPatientDetails from '../features/patients/components/PrintPatientDetails';
-import PrintTestDetails from '../features/reports/components/PrintTestReport';
+// import PrintTestDetails from '../features/reports/components/PrintTestReport';
 import PatientDetails from '../features/patients/components/PatientDetails';
 import LabSearchPicker from '../features/tests/components/LabSearchPicker';
+import PrintTestDetails from '../features/reports/components/PrintTestReport';
 
 type OutletContextType = {
   patientTests: PatientTestsMap;
@@ -40,29 +41,58 @@ export default function Home() {
     };
 
   const toggleTest = (testId: string) => {
-    const nextTestIds = state.selectedTestIds.includes(testId)
-      ? state.selectedTestIds.filter(id => id !== testId)
-      : [...state.selectedTestIds, testId];
+  setPatientTests(prev => {
+    const current = prev[patient.id] ?? {
+      selectedCats: [],
+      selectedTestIds: [],
+      testValues: {},
+    };
+
+    const nextTestIds = current.selectedTestIds.includes(testId)
+      ? current.selectedTestIds.filter(id => id !== testId)
+      : [...current.selectedTestIds, testId];
 
     const nextSelectedCats = LAB_TESTS
       .filter(cat => cat.tests.some(t => nextTestIds.includes(t.id)))
       .map(cat => cat.id);
 
-    setPatientTests(prev => ({
-      ...prev,
-      [patient.id]: { ...state, selectedTestIds: nextTestIds, selectedCats: nextSelectedCats }
-    }));
-  };
-
-  const handleInputChange = (testId: string, fieldKey: string, value: string) => {
-    setPatientTests(prev => ({
+    return {
       ...prev,
       [patient.id]: {
-        ...state,
-        testValues: { ...state.testValues, [`${testId}-${fieldKey}`]: value }
-      }
-    }));
-  };
+        ...current,
+        selectedTestIds: nextTestIds,
+        selectedCats: nextSelectedCats,
+      },
+    };
+  });
+};
+
+
+  const handleInputChange = (
+  testId: string,
+  fieldKey: string,
+  value: TestValue
+) => {
+  setPatientTests(prev => {
+    const current = prev[patient.id] ?? {
+      selectedCats: [],
+      selectedTestIds: [],
+      testValues: {},
+    };
+
+    return {
+      ...prev,
+      [patient.id]: {
+        ...current,
+        testValues: {
+          ...current.testValues,
+          [`${testId}-${fieldKey}`]: value,
+        },
+      },
+    };
+  });
+};
+
 
 
   return (

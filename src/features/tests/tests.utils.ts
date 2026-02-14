@@ -77,6 +77,32 @@ export const LAB_TESTS: LabCategory[] = [
       },
     ],
   },
+  {
+    id: 'widal',
+    name: 'Widal Test',
+    tests: [
+      {
+        id: 'widal',
+        name: 'Widal Test',
+        fields: [
+          {
+            key: 'widal_matrix',
+            label: 'Widal',
+            inputType: 'matrix',
+
+            rows: [
+              { key: 'sto', label: "S. Typhi 'O'" },
+              { key: 'sth', label: "S. Typhi 'H'" },
+              { key: 'sah', label: "S. Paratyphi 'AH'" },
+              { key: 'sbh', label: "S. Paratyphi 'BH'" },
+            ],
+
+            columns: ['1:20', '1:40', '1:80', '1:160', '1:320', '1:640'],
+          },
+        ],
+      }],
+  },
+
 
   {
     id: 'hormone',
