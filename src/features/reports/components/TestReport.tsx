@@ -54,7 +54,6 @@ export default function TestReport({
             case 'matrix':
                 return (
                     <MatrixInput
-                        label={field.label}
                         rows={field.rows ?? []}
                         columns={field.columns ?? []}
                         value={value as MatrixValue | undefined}
@@ -95,10 +94,12 @@ export default function TestReport({
 
                             <div className={styles.fields}>
                                 {test.fields.map(field => (
-                                    <div key={field.key} className={styles.fieldWrapper}>
+                                    <div key={field.key} className={`${styles.fieldWrapper} ${field.inputType === 'matrix' ? styles.matrix : ''}`}>
                                         
                                         <div className={styles.inputContainer}>
-                                            {renderFieldInput(test.id, field)}
+                                            {
+                                            renderFieldInput(test.id, field)
+                                            }
                                         </div>
 
                                         {field.references && field.references.length > 0 && (

@@ -1,7 +1,6 @@
 .sidebar {
-   flex-shrink: 0;         
-  width: 25vw;             
-  min-width: 280px;       
+  flex-shrink: 0;         
+  width: 25vw;           
   max-width: 360px; 
   border-right: 1px solid #ccc;
   padding: 20px;

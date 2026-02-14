@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './MatrixInput.module.css';
 
 type MatrixValue = {
@@ -8,14 +7,13 @@ type MatrixValue = {
 
 type Props = {
   fieldKey: string;
-  label: string;
   rows: { key: string; label: string }[];
   columns: string[];
   value?: MatrixValue;
   onChange: (val: MatrixValue) => void;
 };
 
-export default function MatrixInput({ label, rows, columns, value, onChange }: Props) {
+export default function MatrixInput({ rows, columns, value, onChange }: Props) {
   // Extract current values or default to empty object
   const currentValues = value?.values ?? {};
 
@@ -46,9 +44,9 @@ export default function MatrixInput({ label, rows, columns, value, onChange }: P
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <h3>{label}</h3>
-      </div>
+      </div> */}
 
       <div className={styles.tableWrapper}>
         <table className={styles.matrixTable}>
