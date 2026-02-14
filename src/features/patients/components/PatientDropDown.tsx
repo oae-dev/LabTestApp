@@ -5,13 +5,15 @@ import SearchInput from '../../../common/inputs/SearchInput';
 import { useMemo, useState } from 'react';
 import type { LabPatientDetails } from '../patient.type';
 import ButtonWithTextAndImage from '../../../common/buttons/buttonWithTextAndImage';
+import { MdDelete } from 'react-icons/md';
 
 type Props = {
     patients: LabPatientDetails[];
-    onPlusTapped?: () => void;
+    onAddPatient?: () => void;
+    onDeletePatient?: (patientId: string) => void;
 }
 
-export default function PatientDropDown({ patients, onPlusTapped }: Props) {
+export default function PatientDropDown({ patients, onAddPatient, onDeletePatient }: Props) {
     const [searchQuery, setSearchQuery] = useState('');
 
     // Filter patients based on search input
@@ -37,11 +39,11 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
 
                 {/* 2. Search Functionality */}
                 <div className={styles.searchSection}>
-                <SearchInput
-                    placeholder="Search by name..."
-                    value={searchQuery}
-                    onChange={setSearchQuery}
-                />
+                    <SearchInput
+                        placeholder="Search by name..."
+                        value={searchQuery}
+                        onChange={setSearchQuery}
+                    />
                 </div>
 
                 {/* 1. Add Button at the TOP */}
@@ -50,7 +52,7 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
                         text="Add Lab Result"
                         icon={<FaPlus color='blue' />}
                         variant="secondary"
-                        onClick={onPlusTapped}
+                        onClick={onAddPatient}
                     />
                 </div>
 
@@ -68,7 +70,16 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
                             >
                                 <div className={styles.patientItem}>
                                     <span className={styles.patientName}>{patient.name}</span>
-                                    <span className={styles.patientAge}>{patient.age}y</span>
+                                    <div className={styles.patientRightSection}>
+                                        <span className={styles.patientAge}>{patient.age}y</span>
+                                        <div onClick={(e) => {
+                                            e.preventDefault();
+                                            onDeletePatient?.(patient.id);
+                                        }} style={{ cursor: 'pointer', padding: '5px' }}>
+                                            <MdDelete color='red' />
+                                        </div>
+                                    </div>
+
                                 </div>
                             </NavLink>
                         ))
@@ -77,6 +88,6 @@ export default function PatientDropDown({ patients, onPlusTapped }: Props) {
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

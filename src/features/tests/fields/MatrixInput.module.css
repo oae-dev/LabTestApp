@@ -62,7 +62,8 @@
   border: 1px solid transparent;
   border-radius: 6px;
   background: transparent;
-  color: #cbd5e1; /* Subtle minus color */
+  color: #cbd5e1;
+  /* Subtle minus color */
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 1rem;
@@ -93,7 +94,8 @@
   text-transform: uppercase;
 }
 
-.dotBlue, .dotGray {
+.dotBlue,
+.dotGray {
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -101,5 +103,10 @@
   margin-right: 4px;
 }
 
-.dotBlue { background-color: #2563eb; }
-.dotGray { background-color: #e2e8f0; }
+.dotBlue {
+  background-color: #2563eb;
+}
+
+.dotGray {
+  background-color: #e2e8f0;
+}

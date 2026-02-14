@@ -5,10 +5,11 @@ import type { LabPatientDetails } from "../features/patients/patient.type";
 import PatientDropDown from "../features/patients/components/PatientDropDown";
 type Props = {
     patients: LabPatientDetails[];
-    onPlusTapped?: () => void;
+    onAddPatient?: () => void;
+    onDeletePatient?: (patientId: string) => void;
 }
 
-export default function NavBar({ patients, onPlusTapped }: Props) {
+export default function NavBar({ patients, onAddPatient, onDeletePatient }: Props) {
     const storedUser = localStorage.getItem(STORAGE_KEY_USER);
     if (!storedUser) return;
     const user: StoredUser = JSON.parse(storedUser);
@@ -63,7 +64,7 @@ export default function NavBar({ patients, onPlusTapped }: Props) {
                 </div>
 
                 {/* Patient Dropdown */}
-                <PatientDropDown patients={patients} onPlusTapped={onPlusTapped} />
+                <PatientDropDown patients={patients} onAddPatient={onAddPatient} onDeletePatient={onDeletePatient} />
             </div>
         </nav>
     );

@@ -10,3 +10,9 @@ export const loadPatients = (): LabPatientDetails[] => {
 export const savePatients = (patients: LabPatientDetails[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(patients));
 };
+
+export const deletePatient = (patientId: string) => {
+  const patients = loadPatients();
+  const updatedPatients = patients.filter(p => p.id !== patientId);
+  savePatients(updatedPatients);
+};

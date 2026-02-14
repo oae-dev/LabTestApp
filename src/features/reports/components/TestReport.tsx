@@ -57,19 +57,19 @@ export default function TestReport({
                         rows={field.rows ?? []}
                         columns={field.columns ?? []}
                         value={value as MatrixValue | undefined}
-                        onChange={(val) => handleInputChange(testId, field.key, val)} 
-                        fieldKey={field.key}                    />
+                        onChange={(val) => handleInputChange(testId, field.key, val)}
+                        fieldKey={field.key} />
                 );
 
             default:
                 return (
                     <StandardInput
-                    label={field.label}
-                    unit={field.unit}
-                    inputType={field.inputType === 'number' ? 'number' : 'text'}
-                    value={typeof value === 'string' || typeof value === 'number' ? String(value) : ''}
-                    onChange={(val) => handleInputChange(testId, field.key, val)}
-                />
+                        label={field.label}
+                        unit={field.unit}
+                        inputType={field.inputType === 'number' ? 'number' : 'text'}
+                        value={typeof value === 'string' || typeof value === 'number' ? String(value) : ''}
+                        onChange={(val) => handleInputChange(testId, field.key, val)}
+                    />
                 );
         }
     };
@@ -95,10 +95,10 @@ export default function TestReport({
                             <div className={styles.fields}>
                                 {test.fields.map(field => (
                                     <div key={field.key} className={`${styles.fieldWrapper} ${field.inputType === 'matrix' ? styles.matrix : ''}`}>
-                                        
+
                                         <div className={styles.inputContainer}>
                                             {
-                                            renderFieldInput(test.id, field)
+                                                renderFieldInput(test.id, field)
                                             }
                                         </div>
 

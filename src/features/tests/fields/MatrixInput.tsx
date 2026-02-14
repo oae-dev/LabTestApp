@@ -14,15 +14,15 @@ type Props = {
 };
 
 export default function MatrixInput({ rows, columns, value, onChange }: Props) {
-  // Extract current values or default to empty object
+
   const currentValues = value?.values ?? {};
 
   const handleSelect = (rowKey: string, column: string) => {
     // 1. Get current selections for this specific row, filtering out any empty strings
-    const currentSelections = currentValues[rowKey] 
-      ? currentValues[rowKey].split(',').filter(Boolean) 
+    const currentSelections = currentValues[rowKey]
+      ? currentValues[rowKey].split(',').filter(Boolean)
       : [];
-    
+
     let newSelections;
     if (currentSelections.includes(column)) {
       // 2. If already selected, remove it
@@ -44,10 +44,6 @@ export default function MatrixInput({ rows, columns, value, onChange }: Props) {
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.header}>
-        <h3>{label}</h3>
-      </div> */}
-
       <div className={styles.tableWrapper}>
         <table className={styles.matrixTable}>
           <thead>
@@ -63,7 +59,7 @@ export default function MatrixInput({ rows, columns, value, onChange }: Props) {
               <tr key={row.key}>
                 <td className={styles.rowLabel}>{row.label}</td>
                 {columns.map((column) => {
-                  // CHECK: Does this specific column exist in our comma-separated string?
+
                   const rowData = currentValues[row.key] || "";
                   const isSelected = rowData.split(',').includes(column);
 
@@ -84,7 +80,7 @@ export default function MatrixInput({ rows, columns, value, onChange }: Props) {
           </tbody>
         </table>
       </div>
-      
+
       <div className={styles.footer}>
         <div className={styles.legendItem}>
           <span className={`${styles.dot} ${styles.dotBlue}`}></span>
